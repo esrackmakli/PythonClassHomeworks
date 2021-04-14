@@ -1,56 +1,35 @@
 # odev2-exercise2
 
-class WebPush():
-    def __init__(self, platform, optin, global_frequency_capping, start_date, end_date, language, push_type):
-        self.platform = platform
-        self.optin = optin
-        self.global_frequency_capping = global_frequency_capping
-        self.start_date = start_date
-        self.end_date = end_date
-        self.language = language
-        self.push_type = push_type
-
-    def send_push(self):
-        print("Push gönderildi!")
+class Ogrenci:
+    def __init__(self, ogrenciAdi, ogrenciSoyadi, ogrenciSinifi):
+        self.ogrenciAdi = ogrenciAdi
+        self.ogrenciSoyadi = ogrenciSoyadi
+        self.ogrenciSinifi = ogrenciSinifi
 
 
-class TriggerPush(WebPush):
-    trigger_page = "Category Page"
+class Soru:
+    def NetSayisi(self, dogruSayisi, yanlisSayisi):
+        net = dogruSayisi - int(yanlisSayisi / 4)
+        return net
+
+    def Hesapla(self, net):
+        puan = net * 2
+        return puan
 
 
-class BulkPush(WebPush):
-    send_date = 624752
-
-
-class SegmentPush(WebPush):
-    segment_name = "new user segment"
-
-
-class PriceAlertPush(WebPush):
-
-    def discountPrice(self, price_info, Discount_rate):
-        discounted_price = price_info - (price_info * Discount_rate / 100)
-        return print(discounted_price)
-
-
-class InstockPush(WebPush):
-    def stockUpdate(self, stock_info):
-        if stock_info == True:
-            return print(False)
-        if stock_info == False:
-            return print(True)
-
-
-triggerP = TriggerPush("Desktop", True, 3, "12.07.2019", "12.07.2021", "English", "Trigger")
-bulkP = BulkPush("Desktop", True, 3, "12.07.2019", "12.07.2021", "English", "Bulk")
-segmentP = SegmentPush("Desktop", True, 3, "12.07.2019", "12.07.2021", "English", "Bulk")
-priceAlertP = PriceAlertPush("Desktop", True, 3, "12.07.2019", "12.07.2021", "English", "Price Alert")
-instockP = InstockPush("Desktop", True, 3, "12.07.2019", "12.07.2021", "English", "In Stock")
-
-triggerP.send_push()
-bulkP.send_push()
-segmentP.send_push()
-priceAlertP.discountPrice(250, 15.5)
-priceAlertP.send_push()
-instockP.stockUpdate(True)
-instockP.send_push()
+dogruSayisi = int(input("Ogrencinin dogru sayisini girin: "))
+yanlisSayisi = int(input("Ogrencinin yanlis sayisini girin: "))
+if dogruSayisi < 0 or dogruSayisi > 50 or yanlisSayisi < 0 or yanlisSayisi > 50:
+    print("Doğru ve yanlis sayilari 0'dan kucuk ya da 50'den buyuk olamaz!")
+if dogruSayisi + yanlisSayisi > 50 or dogruSayisi + yanlisSayisi < 0:
+    print("Doğru ve yanlis sayilarinin toplamı 0'dan az 50'den fazla olamaz!")
+else:
+    ogrenciBilgileri = Ogrenci("Ahmet", "Kaya", "5-A")
+    neti = Soru().NetSayisi(dogruSayisi, yanlisSayisi)
+    puani = Soru().Hesapla(neti)
+    print(""
+          "\nAdı: ", ogrenciBilgileri.ogrenciAdi,
+          "\nSoyadi: ", ogrenciBilgileri.ogrenciSoyadi,
+          "\nSinifi: ", ogrenciBilgileri.ogrenciSinifi,
+          "\nNeti: ", neti,
+          "\nPuani: ", puani)
