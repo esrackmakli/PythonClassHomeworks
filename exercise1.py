@@ -1,9 +1,6 @@
 # class odev1
-import self as self
-
-
-class Insan():
-    def __init__(self, ad, soyad, yas, ulke, sehir, yetenekler):
+class Insan:
+    def __init__(self, ad, soyad, yas, ulke, sehir):
         self.ad = ad
         self.soyad = soyad
         self.yas = yas
@@ -11,21 +8,16 @@ class Insan():
         self.sehir = sehir
         self.yetenekler = []
 
+    def kisi_bilgileri(self):
+        return self.ad, self.soyad, self.yas, self.ulke, self.sehir, self.yetenekler
 
-kisi = Insan("esra", "cakmaklı", 25, "turkiye", "zonguldak", "")
-
-
-def yetenek_ekle():
-    kisi.yetenekler.append('tuval boyamak')
-    kisi.yetenekler.append('mızıka çalmak')
-    kisi.yetenekler.append('güzel yemek yapmak')
-    print("yetenekler: " + str(kisi.yetenekler))
+    def yetenek_ekle(self, yetenek):
+        self.yetenekler.append(yetenek)
 
 
-def kisi_bilgileri(kisi):
-   return print("ad soyad: " + kisi.ad,
-          kisi.soyad + "\n" + "yas: " + str(kisi.yas) + "\n" + "ulke: " + kisi.ulke + "\n" + "sehir: " + kisi.sehir)
+kisi = Insan("esra", "cakmaklı", 25, "turkiye", "zonguldak")
+kisi.yetenek_ekle("tuval boyamak")
+kisi.yetenek_ekle("gitar çalmak")
+print(kisi.kisi_bilgileri())
 
 
-kisi_bilgileri(kisi)
-yetenek_ekle()
